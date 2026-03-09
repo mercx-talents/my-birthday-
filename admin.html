@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><title>Admin Panel</title></head>
+<body>
+<h1>Admin Dashboard</h1>
+<h3>Visitors: {{visits}}</h3>
+<h2>Birthday Wishes</h2>
+{% for w in wishes %}
+<p>{{w[1]}} : {{w[2]}}
+{% if w[3] %}
+<audio controls src="/voices/{{w[3]}}"></audio>
+{% endif %}
+<a href="/delete/{{w[0]}}">Delete</a>
+</p>
+{% endfor %}
+<a href="/logout">Logout</a>
+</body>
+</html>
