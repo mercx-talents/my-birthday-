@@ -1,0 +1,36 @@
+import sqlite3
+
+conn = sqlite3.connect("database.db")
+
+conn.execute("""
+CREATE TABLE IF NOT EXISTS wishes (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    message TEXT,
+    voice BLOB
+)
+""")
+
+conn.execute("""
+CREATE TABLE IF NOT EXISTS visitors (
+    id INTEGER PRIMARY KEY,
+    count INTEGER
+)
+""")
+
+conn.execute("""
+CREATE TABLE IF NOT EXISTS admin (
+    id INTEGER PRIMARY KEY,
+    username TEXT,
+    password TEXT
+)
+""")
+
+# Create default admin if not exists
+conn.execute("INSERT OR IGNORE INTO admin (id, username, password) VALUES (1, 'admin', '1234')")
+
+# Initialize visitor count
+conn.execute("INSERT OR IGNORE INTO visitors (id, count) VALUES (1,0)")
+
+conn.commit()
+conn.close()
