@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sadik Birthday</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1>🎉 Happy Birthday Sadik 🎉</h1>
+<h3>👀 Visitors: {{visits}}</h3>
+
+<h2>Leave a Wish</h2>
+<form method="POST" action="/send" enctype="multipart/form-data">
+<input name="name" placeholder="Your Name" required>
+<input name="message" placeholder="Your Wish" required>
+<input type="file" name="voice" accept="audio/*">
+<button>Send</button>
+</form>
+
+<h2>Birthday Wishes</h2>
+{% for w in wishes %}
+<p>🎉 {{w[1]}}: {{w[2]}}
+{% if w[3] %}
+<audio controls src="/voices/{{w[3]}}"></audio>
+{% endif %}
+</p>
+{% endfor %}
+
+<a href="/login">Admin Panel</a>
+<audio autoplay loop>
+<source src="/static/birthday.mp3" type="audio/mpeg">
+</audio>
+</body>
+</html>
